@@ -15,15 +15,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String[] liste1;
+    private  ArrayList<String> list_array;
+    private ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String[] liste1 = new String[]{
+                "test1",
+                "test2"
+        };
+
+        ListView list = findViewById(R.id.listeValeur);
+
+        list_array = new ArrayList<String>(Arrays.asList(liste1));
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,liste1);
+
+        list.setAdapter(adapter);
     }
 
     @Override
@@ -54,11 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
             ListView list = findViewById(R.id.listeValeur);
 
-            String[] tabValeurs = {"anthony"};
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.activity_list_item,tabValeurs);
-
             list.setAdapter(adapter);
+            list_array.add(valeur);
         }
     }
 }
